@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 function PayFee() {
-  const [loading, setLoading] = useState(false);
   const [cardNumber, setCardNumber] = useState("");
   const [cardHolderName, setCardHolderName] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
@@ -19,7 +18,6 @@ function PayFee() {
     }
     // Simulate payment processing
     try {
-      setLoading(true);
       await axios
         .patch(
           `${import.meta.env.VITE_BACKEND_URL}/api/user/pay`,
@@ -31,19 +29,15 @@ function PayFee() {
           }
         )
         .then((res) => {
-          console.log("Payment response:", res.data);
           toast.success("Payment successful!");
           navigate("/profile");
         })
         .catch((err) => {
-          console.error("Payment error:", err);
           toast.error("Payment failed. Please try again.");
         });
     } catch (error) {
-      console.error("Payment error:", error);
       toast.error("An error occurred while processing the payment.");
     } finally {
-      setLoading(false);
       setCardNumber("");
       setCardHolderName("");
       setExpiryDate("");

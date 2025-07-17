@@ -29,7 +29,6 @@ export default function Login() {
           password,
         }
       );
-      console.log("Login response:", res.data);
       toast.success("Login successful! Redirecting to profile...");
       localStorage.setItem("token", res.data.token);
       navigate("/profile");

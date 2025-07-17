@@ -29,8 +29,6 @@ export default function Signup() {
         toast.error("Please enter a valid email address");
         return;
       }
-      console.log("Signup data:", { email, name, password });
-      console.log("Backend URL:", import.meta.env.VITE_BACKEND_URL);
 
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`,
@@ -40,7 +38,6 @@ export default function Signup() {
           password,
         }
       );
-      console.log("Signup response:", res.data);
 
       localStorage.setItem("token", res.data.token);
       toast.success("Signup successful! Redirecting to profile...");

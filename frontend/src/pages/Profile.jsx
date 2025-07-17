@@ -22,7 +22,6 @@ function Profile() {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
-      console.log("Profile data:", res.data);
 
       setUser(res.data);
     };
@@ -31,7 +30,6 @@ function Profile() {
 
   useEffect(() => {
     socket.on("feesPaid", ({ userId }) => {
-      console.log("Fees paid event received:", userId);
       if (userId === user._id) {
         setUser((prevUser) => ({ ...prevUser, feesPaid: true }));
       }
@@ -50,12 +48,11 @@ function Profile() {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
-      console.log("Profile updated:", res.data);
       toast.success(res.data.message);
       setUser(res.data.user);
       setDialogOpen(false);
     } catch (error) {
-      console.error("Update failed:", error.response?.data || error.message);
+      toast.error("Profile not updated");
     }
   };
 

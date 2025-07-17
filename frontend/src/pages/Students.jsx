@@ -12,9 +12,8 @@ function Students() {
         `${import.meta.env.VITE_BACKEND_URL}/api/user/all`
       );
       setUsers(res.data);
-      console.log("Users data:", res.data);
     } catch (err) {
-      console.error("Error fetching users:", err);
+      console.error(err);
     }
   };
   useEffect(() => {
@@ -23,7 +22,6 @@ function Students() {
 
   useEffect(() => {
     socket.on("feesPaid", ({ userId }) => {
-      console.log("Fees paid event received:", userId);
       setUsers((prevUsers) =>
         prevUsers.map((u) => (u._id === userId ? { ...u, feesPaid: true } : u))
       );
@@ -40,10 +38,6 @@ function Students() {
       socket.off("profileUpdated");
     };
   }, []);
-
-  useEffect(() => {
-    console.log("Users data:", users);
-  }, [users]);
 
   if (users.length === 0) {
     return (

@@ -3,7 +3,6 @@ import { Link, NavLink, useNavigate } from "react-router";
 
 function Navbar() {
   const [signedIn, setSignedIn] = useState(false);
-  const navigate = useNavigate();
   const handleLogOut = () => {
     localStorage.removeItem("token");
     setSignedIn(false);
